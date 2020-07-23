@@ -6,19 +6,17 @@ import Container from '../components/Container';
 import Navbar from '../components/Navbar';
 import GlobalStyle from '../components/GlobalStyles';
 
-const BasketView = ({ className }) => {
-  return (
-    <>
-      <Container>
-        <Navbar />
-        <div className={className}>
-          <h1>Your Basket</h1>
-          <Basket />
-        </div>
-      </Container>
-    </>
-  )
-}
+const BasketView = ({ className }) => (
+  <>
+    <Container>
+      <Navbar />
+      <div className={className}>
+        <h1>Your Basket</h1>
+        <Basket />
+      </div>
+    </Container>
+  </>
+);
 
 const StyledBasketView = styled(BasketView)`
   display: flex;

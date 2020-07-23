@@ -7,8 +7,8 @@ import BasketItem from './BasketItem';
 
 const Basket = () => {
   useLocal();
-  const [{basket}, dispatch] = useAppState();
-  
+  const [{ basket }, dispatch] = useAppState();
+
   const basketTotalPrice = basket.reduce((acc, item) => {
     const pricePerItem = item.price * item.quantity;
     return acc + pricePerItem;
@@ -21,9 +21,12 @@ const Basket = () => {
           <BasketItem product={product} key={index} />
         ))}
       </ul>
-      <h2>Total: £{convertPenniesToPounds(basketTotalPrice)}</h2>
+      <h2>
+        Total: £
+        {convertPenniesToPounds(basketTotalPrice)}
+      </h2>
     </>
-  )
-}
+  );
+};
 
 export default Basket;
