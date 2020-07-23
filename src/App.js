@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import { AppStateProvider } from './appContext';
-import Basket from './views/Basket';
+import Transactions from './components/TransactionsHome';
 import GlobalStyle from './components/GlobalStyles';
 import Home from './components/Home';
 
@@ -16,7 +16,8 @@ const App = () => (
       <Switch>
         <AppStateProvider>
           <Route exact path="/"><Home /></Route>
-          <Route path="/basket"><Basket /></Route>
+          <Route exact path="/transactions"><Transactions /></Route>
+          <Route exact path="/whatever" render={() => <Transactions />} />
         </AppStateProvider>
       </Switch>
     </Router>

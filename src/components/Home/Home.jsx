@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { withRouter, Link } from 'react-router-dom';
 import { useAppState } from '../../appContext';
 import firebase from '../../lib/firebase';
 import actions from '../../actions';
 import categoryDropdownOptions from '../../constants/transactionCategories';
 
-const Home = ({ className }) => {
+const Home = ({ className, history }) => {
   const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
   const [trxAmount, setTrxAmount] = useState(0);
@@ -17,6 +18,7 @@ const Home = ({ className }) => {
       await db.collection('transactions').add({
         ...trx,
       });
+      history.push('/transactions');
     } catch (err) {
       console.log('ERROR \n', err);
     }
@@ -42,6 +44,7 @@ const Home = ({ className }) => {
 
   return (
     <div className={className}>
+      <Link to="/transactions">Transactions</Link>
       <form onSubmit={addTransactionToState} className="form">
         <input
           name="merchant-name"
@@ -83,4 +86,4 @@ const StyledHome = styled(Home)`
   }
 `;
 
-export default StyledHome;
+export default withRouter(StyledHome);
