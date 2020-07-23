@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useAppState } from '../../appContext';
+import firebase from '../../lib/firebase';
 import actions from '../../actions';
 import categoryDropdownOptions from '../../constants/transactionCategories';
 
@@ -10,13 +11,25 @@ const Home = ({ className }) => {
   const [trxAmount, setTrxAmount] = useState(0);
   const [trxCategory, setTrxCategory] = useState('');
 
-  const addTransactionToState = (e) => {
+  const saveTransaction = async (trx) => {
+    try {
+      const db = firebase.firestore();
+      await db.collection('transactions').add({
+        ...trx,
+      });
+    } catch (err) {
+      console.log('ERROR \n', err);
+    }
+  };
+
+  const addTransactionToState = async (e) => {
     e.preventDefault();
     const name = merchantName || 'Default';
     const transaction = { merchantName: name, trxAmount, category: trxCategory };
     dispatch({ type: actions.ADD_TRANSACTION, transaction });
     setMerchantName('');
     setTrxAmount('');
+    await saveTransaction(transaction);
   };
 
   const increment = (num) => {
@@ -53,7 +66,7 @@ const Home = ({ className }) => {
           onChange={changeCategory}
         >
           {categoryDropdownOptions.map((option) => (
-            <option value={option}>{option}</option>
+            <option key={option} value={option}>{option}</option>
           ))}
         </select>
         <input type="submit" value="Submit" />
