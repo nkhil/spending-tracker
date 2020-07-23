@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { useAppState } from '../../appContext';
 import actions from '../../actions';
+import categoryDropdownOptions from '../../constants/transactionCategories';
 
-const Home = () => {
-  const [state, dispatch] = useAppState();
+const Home = ({ className }) => {
+  const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
-  const [trxAmount, setTrxAmount] = useState('');
-
-  console.log('state', state);
+  const [trxAmount, setTrxAmount] = useState(0);
+  const [trxCategory, setTrxCategory] = useState('');
 
   const addTransactionToState = (e) => {
     e.preventDefault();
-    const transaction = { merchantName, trxAmount };
+    const name = merchantName || 'Default';
+    const transaction = { merchantName: name, trxAmount, category: trxCategory };
     dispatch({ type: actions.ADD_TRANSACTION, transaction });
     setMerchantName('');
     setTrxAmount('');
   };
 
+  const increment = (num) => {
+    setTrxAmount(trxAmount + num);
+  };
+
+  const changeCategory = (e) => {
+    setTrxCategory(e.target.value);
+  };
+
   return (
-    <>
-      <form onSubmit={addTransactionToState}>
+    <div className={className}>
+      <form onSubmit={addTransactionToState} className="form">
         <input
           name="merchant-name"
           placeholder="merchant name"
@@ -35,10 +45,29 @@ const Home = () => {
           value={trxAmount}
           onChange={(e) => setTrxAmount(+e.target.value)}
         />
+        <button onClick={() => increment(10)} type="button">+10</button>
+        <button onClick={() => increment(5)} type="button">+5</button>
+        <button onClick={() => increment(1)} type="button">+1</button>
+        <select
+          value={trxCategory}
+          onChange={changeCategory}
+        >
+          {categoryDropdownOptions.map((option) => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
         <input type="submit" value="Submit" />
       </form>
-    </>
+    </div>
   );
 };
 
-export default Home;
+
+const StyledHome = styled(Home)`
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export default StyledHome;
