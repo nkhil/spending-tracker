@@ -5,7 +5,7 @@ const Container = ({ className, children }) => (
   <div className={className}>
     {children}
   </div>
-)
+);
 
 const StyledContainer = styled(Container)`
   max-width: 1000px;
