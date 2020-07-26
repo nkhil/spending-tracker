@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { Link } from 'react-router-dom';
 import firebase from '../../lib/firebase';
@@ -15,11 +15,19 @@ const TransactionsHome = ({ className }) => {
     if (value) {
       dispatch({ type: actions.ADD_TRANSACTIONS, transactions: value.docs });
     }
-  }, [value]);
+  }, [value, dispatch]);
 
   if (error) {
     console.log('there was an error');
     console.log(error);
+  }
+
+  if (loading) {
+    return (
+      <>
+        <h1>Loading...</h1>
+      </>
+    );
   }
 
   return (
