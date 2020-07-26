@@ -1,9 +1,3 @@
-export function addTransactionToState(transactionsState, newTransaction) {
-  console.log('addTransactionToState -> newTransaction', newTransaction);
-  console.log('addTransactionToState -> transactionsState', transactionsState);
+export default function addTransactionToState(transactionsState, newTransaction) {
   return [...transactionsState, newTransaction];
-}
-
-export function foo() {
-  return 'foo';
 }

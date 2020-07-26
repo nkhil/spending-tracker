@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import actions from './actions';
-import { addTransactionToState } from './helpers/addTransactionToState';
+import addTransactionToState from './helpers/addTransactionToState';
 
 const AppContext = createContext();
 
