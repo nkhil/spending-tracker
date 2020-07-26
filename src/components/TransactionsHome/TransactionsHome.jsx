@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { Link } from 'react-router-dom';
 import firebase from '../../lib/firebase';
-
+import { useAppState } from '../../appContext';
+import actions from '../../actions';
 
 const TransactionsHome = ({ className }) => {
-  const [transactions, setTransactions] = useState([]);
+  const [state, dispatch] = useAppState();
+  const { transactions } = state;
   const query = firebase.firestore().collection('transactions');
   const [value, loading, error] = useCollection(query);
 
   useEffect(() => {
     if (value) {
-      setTransactions(value.docs);
+      dispatch({ type: actions.ADD_TRANSACTIONS, transactions: value.docs });
     }
   }, [value]);
 
@@ -21,13 +23,14 @@ const TransactionsHome = ({ className }) => {
   }
 
   return (
-    <>
+    <div className={className}>
       <Link to="/">Add transaction</Link>
       <h1>Transactions</h1>
       {transactions.map((trx, index) => {
         const { merchantName, trxAmount, category } = trx.data();
+        const { id } = trx;
         return (
-          <div key={index}>
+          <div key={id}>
             <h3>{merchantName}</h3>
             <p>
               <strong>Amount:</strong>
@@ -37,7 +40,7 @@ const TransactionsHome = ({ className }) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
