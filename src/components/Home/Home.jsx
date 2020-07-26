@@ -80,9 +80,12 @@ const Home = ({ className, history }) => {
 
 
 const StyledHome = styled(Home)`
-  .form {
-    display: flex;
-    flex-direction: column;
+  
+  @media screen and (max-width: 599px) {
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `;
 
