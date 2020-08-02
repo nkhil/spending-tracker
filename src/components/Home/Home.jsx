@@ -4,13 +4,19 @@ import { withRouter, Link } from 'react-router-dom';
 import { useAppState } from '../../appContext';
 import firebase from '../../lib/firebase';
 import actions from '../../actions';
-import categoryDropdownOptions from '../../constants/transactionCategories';
+import categoryConstants from '../../constants/transactionCategories';
+import commonMerchants from '../../constants/commonMerchants';
+import CategoryButton from '../MerchantNameButton';
+import InputField from '../InputField';
+import NumberImputButton from '../NumberInputButton';
 
 const Home = ({ className, history }) => {
   const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
   const [trxAmount, setTrxAmount] = useState(0);
-  const [trxCategory, setTrxCategory] = useState('');
+  const [trxCategory, setTrxCategory] = useState('Uncategorised');
+
+  const amounts = [10, 5, 1];
 
   const saveTransaction = async (trx) => {
     try {
@@ -38,53 +44,91 @@ const Home = ({ className, history }) => {
     setTrxAmount(trxAmount + num);
   };
 
-  const changeCategory = (e) => {
-    setTrxCategory(e.target.value);
+  const decrement = (num) => {
+    const totalAmount = trxAmount - num;
+    const newTrxState = totalAmount < 0 ? 0 : totalAmount;
+    setTrxAmount(newTrxState);
   };
+
+  const setCommonMerchants = (merchantSuggestion) => {
+    setMerchantName(merchantSuggestion);
+  };
+
+  const convertAndSetTrxAmount = (trxString) => setTrxAmount(+trxString);
 
   return (
     <div className={className}>
       <Link to="/transactions">Transactions</Link>
       <form onSubmit={addTransactionToState} className="form">
-        <input
+        <InputField
           name="merchant-name"
-          placeholder="merchant name"
-          type="text"
+          placeholder="Merchant name"
           value={merchantName}
-          onChange={(e) => setMerchantName(e.target.value)}
+          onChange={setMerchantName}
         />
-        <input
+        <div className="category-options-row">
+          {commonMerchants.map((merchant) => (
+            <CategoryButton key={merchant} text={merchant} onClick={setCommonMerchants} />
+          ))}
+        </div>
+        <InputField
           name="trx-amount"
           placeholder="Amount"
           type="text"
           pattern="[0-9]*"
           value={trxAmount}
-          onChange={(e) => setTrxAmount(+e.target.value)}
+          onChange={convertAndSetTrxAmount}
         />
-        <button onClick={() => increment(10)} type="button">+10</button>
-        <button onClick={() => increment(5)} type="button">+5</button>
-        <button onClick={() => increment(1)} type="button">+1</button>
-        <select
-          value={trxCategory}
-          onChange={changeCategory}
-        >
-          {categoryDropdownOptions.map((option) => (
-            <option key={option} value={option}>{option}</option>
+        <div className="increment-decriment-buttons">
+          {amounts.map((num) => (
+            <NumberImputButton key={num} number={num} increment={increment} decrement={decrement} />
           ))}
-        </select>
-        <input type="submit" value="Submit" />
+        </div>
+        <h3>
+          Category:
+          {' '}
+          {trxCategory}
+        </h3>
+        <div className="category-options-row">
+          {categoryConstants.map((cat) => (
+            <CategoryButton key={cat} text={cat} onClick={setTrxCategory} />
+          ))}
+        </div>
+        <input className="submit-button" type="submit" value="Submit" />
       </form>
     </div>
   );
 };
 
-
 const StyledHome = styled(Home)`
   
   @media screen and (max-width: 599px) {
+    margin: 0 10px;
+
     .form {
       display: flex;
       flex-direction: column;
+    }
+
+    .category-options-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .increment-decriment-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+
+    .submit-button {
+      background-color: black;
+      color: white;
+      font-size: 1.5rem;
+      margin: 10px 0;
+      padding: 5px;
+      border-radius: 5px;
     }
   }
 `;
