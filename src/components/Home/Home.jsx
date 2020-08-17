@@ -77,7 +77,11 @@ const Home = ({ className, history }) => {
         />
         <div className="category-options-row">
           {commonMerchants.map((merchant) => (
-            <CategoryButton key={merchant.merchantName} text={merchant.merchantName} onClick={setCommonMerchants} />
+            <CategoryButton
+              key={merchant.merchantName}
+              text={merchant.merchantName}
+              onClick={setCommonMerchants}
+            />
           ))}
         </div>
         <InputField
