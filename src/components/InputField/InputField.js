@@ -20,9 +20,12 @@ function InputField({
 }
 
 const StyledInputField = styled(InputField)`
+  background-color: #F3F4F6;
   font-size: 1.5rem;
   margin: 20px 0;
   border-radius: 5px;
+  border: 0;
+  padding: 5px;
 `;
 
 export default StyledInputField;

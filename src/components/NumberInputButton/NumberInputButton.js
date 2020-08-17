@@ -34,12 +34,12 @@ const StyledNumberInputButton = styled(NumberInputButton)`
   flex-direction: column;
   display: inline;
   font-size: 1.5rem;
+  background-color: #F3F4F6;
 
   .number-input-button_add {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: pink;
     border-radius: 3px 3px 0 0;
     width: 50px;
     padding: 10px 0;
@@ -51,7 +51,6 @@ const StyledNumberInputButton = styled(NumberInputButton)`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: pink;
     border-radius: 3px 3px 0 0;
     width: 50px;
     padding: 10px 0;
@@ -61,7 +60,6 @@ const StyledNumberInputButton = styled(NumberInputButton)`
 
   .number-input-button_number {
     width: 50px;
-    background-color: pink;
     padding: 10px 0;
     border: 0;
   }

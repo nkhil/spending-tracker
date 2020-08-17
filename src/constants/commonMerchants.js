@@ -1,7 +1,18 @@
 export default [
-  'Sainsburys',
-  'TFL',
-  'Takeaway',
-  'Something',
-  'SomethingElse',
+  {
+    merchantName: 'Sainsbury\'s',
+    trxCategory: 'Groceries',
+  },
+  {
+    merchantName: 'TFL',
+    trxCategory: 'Transport',
+  },
+  {
+    merchantName: 'Takeaway',
+    trxCategory: 'Eating Out',
+  },
+  {
+    merchantName: 'Restaurant',
+    trxCategory: 'Eating Out',
+  },
 ];

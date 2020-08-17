@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { Link } from 'react-router-dom';
 import firebase from '../../lib/firebase';
 import { useAppState } from '../../appContext';
+import TransactionList from '../TransactionsList';
 
 const TransactionsHome = ({ className }) => {
   const [, dispatch] = useAppState();
   const [transactions, setTransactions] = useState([]);
-  const query = firebase.firestore().collection('transactions');
+  const query = firebase.firestore().collection('transactions').orderBy('date', 'desc');
   const [value, loading, error] = useCollection(query);
 
   useEffect(() => {
@@ -32,23 +34,13 @@ const TransactionsHome = ({ className }) => {
   return (
     <div className={className}>
       <Link to="/">Add transaction</Link>
-      <h1>Transactions</h1>
-      {transactions.map((trx) => {
-        const { merchantName, trxAmount, category } = trx.data();
-        const { id } = trx;
-        return (
-          <div key={id}>
-            <h3>{merchantName}</h3>
-            <p>
-              <strong>Amount:</strong>
-              {trxAmount}
-            </p>
-            <p>{category}</p>
-          </div>
-        );
-      })}
+      <TransactionList transactions={transactions} />
     </div>
   );
 };
 
-export default TransactionsHome;
+const StyledTransactionHome = styled(TransactionsHome)`
+  background-color: #F3F4F6;
+`;
+
+export default StyledTransactionHome;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
 import { useAppState } from '../../appContext';
 import firebase from '../../lib/firebase';
 import actions from '../../actions';
@@ -9,12 +10,14 @@ import commonMerchants from '../../constants/commonMerchants';
 import CategoryButton from '../MerchantNameButton';
 import InputField from '../InputField';
 import NumberImputButton from '../NumberInputButton';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Home = ({ className, history }) => {
   const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
   const [trxAmount, setTrxAmount] = useState(0);
   const [trxCategory, setTrxCategory] = useState('Uncategorised');
+  const [trxDate, setTrxDate] = useState(new Date());
 
   const amounts = [10, 5, 1];
 
@@ -33,7 +36,9 @@ const Home = ({ className, history }) => {
   const addTransactionToState = async (e) => {
     e.preventDefault();
     const name = merchantName || 'Default';
-    const transaction = { merchantName: name, trxAmount, category: trxCategory };
+    const transaction = {
+      merchantName: name, trxAmount, category: trxCategory, date: trxDate,
+    };
     dispatch({ type: actions.ADD_TRANSACTION, transaction });
     setMerchantName('');
     setTrxAmount('');
@@ -52,9 +57,13 @@ const Home = ({ className, history }) => {
 
   const setCommonMerchants = (merchantSuggestion) => {
     setMerchantName(merchantSuggestion);
+    const cat = commonMerchants.find((merchant) => merchant.merchantName === merchantSuggestion).trxCategory;
+    setTrxCategory(cat);
   };
 
   const convertAndSetTrxAmount = (trxString) => setTrxAmount(+trxString);
+
+  const handleDateChange = (date) => setTrxDate(date);
 
   return (
     <div className={className}>
@@ -68,7 +77,7 @@ const Home = ({ className, history }) => {
         />
         <div className="category-options-row">
           {commonMerchants.map((merchant) => (
-            <CategoryButton key={merchant} text={merchant} onClick={setCommonMerchants} />
+            <CategoryButton key={merchant.merchantName} text={merchant.merchantName} onClick={setCommonMerchants} />
           ))}
         </div>
         <InputField
@@ -94,7 +103,13 @@ const Home = ({ className, history }) => {
             <CategoryButton key={cat} text={cat} onClick={setTrxCategory} />
           ))}
         </div>
-        <input className="submit-button" type="submit" value="Submit" />
+        <h3>Date</h3>
+        <DatePicker
+          selected={trxDate}
+          onChange={handleDateChange}
+          dateFormat="dd/MM/yyyy"
+        />
+        <input className="submit-button" type="submit" value="Add transaction" />
       </form>
     </div>
   );
@@ -126,9 +141,11 @@ const StyledHome = styled(Home)`
       background-color: black;
       color: white;
       font-size: 1.5rem;
-      margin: 10px 0;
+      margin: 30px 0;
       padding: 5px;
       border-radius: 5px;
+      border: 0;
+      padding: 10px 5px;
     }
   }
 `;

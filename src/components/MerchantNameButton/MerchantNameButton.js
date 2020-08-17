@@ -17,11 +17,14 @@ function MerchantNameButton({ className, text, onClick }) {
 }
 
 const StyledMerchantNameButton = styled(MerchantNameButton)`
-  background-color: pink;
+  background-color: #E8EEFC;
+  color: #426BAD;
   border-radius: 8px;
   display: inline;
   margin: 5px;
   font-size: 1.5rem;
+  border: 0;
+  padding: 5px 10px;
 `;
 
 export default StyledMerchantNameButton;
