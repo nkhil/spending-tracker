@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { Link } from 'react-router-dom';
 import firebase from '../../lib/firebase';
 import { useAppState } from '../../appContext';
 import TransactionList from '../TransactionsList';
+import TransactionHero from '../TransactionHero';
 
 const TransactionsHome = ({ className }) => {
   const [, dispatch] = useAppState();
@@ -33,7 +33,7 @@ const TransactionsHome = ({ className }) => {
 
   return (
     <div className={className}>
-      <Link to="/">Add transaction</Link>
+      <TransactionHero transactions={transactions} />
       <TransactionList transactions={transactions} />
     </div>
   );

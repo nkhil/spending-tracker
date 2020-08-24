@@ -6,7 +6,7 @@ import moment from 'moment';
 function TransactionItem({
   className, merchantName, trxAmount, category, date, id,
 }) {
-  const formattedDate = moment(date.toDate()).format('Do MMM');
+  const formattedDate = moment(date.toDate()).format('MMM D');
   return (
     <div className={className} key={id}>
       <div className="transaction-top-row">
@@ -18,7 +18,7 @@ function TransactionItem({
       </div>
       <div className="transaction-top-row">
         <p className="trx-category">{category}</p>
-        <p>{formattedDate}</p>
+        <p className="trx-date">{formattedDate}</p>
       </div>
     </div>
   );
@@ -29,6 +29,7 @@ const StyledTransactionItem = styled(TransactionItem)`
   flex-direction: column;
   background-color: white;
   margin: 15px 0;
+  padding: 0 10px;
 
   .transaction-top-row {
     display: flex;
@@ -45,6 +46,11 @@ const StyledTransactionItem = styled(TransactionItem)`
 
   .trx-amount {
     margin: 0;
+  }
+
+  .trx-date {
+    font-size: 10px;
+    color: #9A9A9A;
   }
 
   .trx-category {

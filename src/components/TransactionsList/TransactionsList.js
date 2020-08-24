@@ -31,12 +31,13 @@ const StyledTransactionList = styled(TransactionList)`
     font-size: 1rem;
     color: #AAAAAA;
     padding-left: 5px;
-    margin-top: 35px;
+    margin-top: 10px;
   }
 
   background-color: white;
   border-radius: 10px;
   margin: 10px;
+  margin-top: 20px;
 `;
 
 export default StyledTransactionList;
