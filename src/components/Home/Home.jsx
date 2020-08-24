@@ -57,8 +57,11 @@ const Home = ({ className, history }) => {
 
   const setCommonMerchants = (merchantSuggestion) => {
     setMerchantName(merchantSuggestion);
-    const cat = commonMerchants.find((merchant) => merchant.merchantName === merchantSuggestion).trxCategory;
-    setTrxCategory(cat);
+    const transactionCategory = commonMerchants.find((merchant) => (
+      merchant.merchantName === merchantSuggestion)).trxCategory;
+    if (transactionCategory) {
+      setTrxCategory(transactionCategory);
+    }
   };
 
   const convertAndSetTrxAmount = (trxString) => setTrxAmount(+trxString);
