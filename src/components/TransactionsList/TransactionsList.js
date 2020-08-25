@@ -5,6 +5,7 @@ import TransactionItem from './TransactionItem';
 
 function TransactionList({ className, transactions }) {
   const formatDate = (date) => moment(date.toDate()).format('MMM D');
+  let trxColour = true;
   return (
     <div className={className}>
       <h2>Transactions</h2>
@@ -14,7 +15,6 @@ function TransactionList({ className, transactions }) {
         } = trx.data();
         const { id } = trx;
         const formattedDate = formatDate(date);
-        let trxColour = false;
         if (index > 0) {
           const lastDate = formatDate(transactions[index - 1].data().date);
           if (formattedDate !== lastDate) {
