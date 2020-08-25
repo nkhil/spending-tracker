@@ -1,23 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import TransactionItem from './TransactionItem';
 
 function TransactionList({ className, transactions }) {
+  const formatDate = (date) => moment(date.toDate()).format('MMM D');
   return (
     <div className={className}>
       <h2>Transactions</h2>
-      {transactions.map((trx) => {
+      {transactions.map((trx, index) => {
         const {
           merchantName, trxAmount, category, date,
         } = trx.data();
         const { id } = trx;
+        const formattedDate = formatDate(date);
+        let trxColour = false;
+        if (index > 0) {
+          const lastDate = formatDate(transactions[index - 1].data().date);
+          if (formattedDate !== lastDate) {
+            trxColour = !trxColour;
+          }
+        }
         return (
           <TransactionItem
             merchantName={merchantName}
             trxAmount={trxAmount}
             category={category}
-            date={date}
+            date={formattedDate}
             key={id}
+            colour={trxColour}
           />
         );
       })}

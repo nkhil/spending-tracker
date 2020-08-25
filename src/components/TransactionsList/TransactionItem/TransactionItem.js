@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 
 function TransactionItem({
-  className, merchantName, trxAmount, category, date, id,
+  className, merchantName, trxAmount, category, date, id, colour,
 }) {
-  const formattedDate = moment(date.toDate()).format('MMM D');
   return (
     <div className={className} key={id}>
       <div className="transaction-top-row">
@@ -18,7 +16,7 @@ function TransactionItem({
       </div>
       <div className="transaction-top-row">
         <p className="trx-category">{category}</p>
-        <p className="trx-date">{formattedDate}</p>
+        <p className="trx-date">{date}</p>
       </div>
     </div>
   );
@@ -27,9 +25,12 @@ function TransactionItem({
 const StyledTransactionItem = styled(TransactionItem)`
   display: flex;
   flex-direction: column;
-  background-color: white;
-  margin: 15px 0;
-  padding: 0 10px;
+  background-color: ${(props) => {
+    if (props.colour) return 'white';
+    return '#F8F8F8';
+  }};
+  margin: 0;
+  padding: 15px 10px;
 
   .transaction-top-row {
     display: flex;
