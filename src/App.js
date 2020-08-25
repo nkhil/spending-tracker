@@ -8,6 +8,7 @@ import { AppStateProvider } from './appContext';
 import Transactions from './components/TransactionsHome';
 import GlobalStyle from './components/GlobalStyles';
 import Home from './components/Home';
+import Login from './components/Login';
 
 const App = () => (
   <>
@@ -18,6 +19,7 @@ const App = () => (
           <Route exact path="/"><Home /></Route>
           <Route exact path="/transactions"><Transactions /></Route>
           <Route exact path="/whatever" render={() => <Transactions />} />
+          <Route exact path="/login" render={() => <Login />} />
         </AppStateProvider>
       </Switch>
     </Router>
