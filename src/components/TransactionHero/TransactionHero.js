@@ -22,14 +22,14 @@ function TransactionHero({ className, transactions }) {
   const formattedMonthAndYear = moment().format('MMM YYYY');
   return (
     <div className={className}>
-      <p>{formattedMonthAndYear}</p>
+      <p className="transaction-hero-month-year">{formattedMonthAndYear}</p>
       <h2>
         £
         {TOTAL_BUDGET - totalThisMonth}
         {' '}
         remaining
       </h2>
-      <p>
+      <p className="transaction-hero-spent-since">
         £
         {totalThisMonth}
         {' '}
@@ -51,6 +51,23 @@ const StyledTransactionHero = styled(TransactionHero)`
   border-radius: 15px;
   margin: 5px;
   padding: 10px;
+
+  p {
+    margin: 0;
+    color: #757575;
+  }
+
+  h2 {
+    margin: 0;
+  }
+
+  .transaction-hero-month-year {
+    margin: 15px;
+  }
+
+  .transaction-hero-spent-since {
+    margin: 10px;
+  }
 `;
 
 export default StyledTransactionHero;

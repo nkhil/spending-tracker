@@ -43,6 +43,7 @@ const StyledTransactionList = styled(TransactionList)`
     color: #AAAAAA;
     padding-left: 5px;
     margin-top: 10px;
+    padding-top: 10px;
   }
 
   background-color: white;
