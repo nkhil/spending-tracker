@@ -6,6 +6,12 @@ const AppContext = createContext();
 
 const appStateReducer = (state, action) => {
   switch (action.type) {
+    case actions.USER_EXISTS: {
+      return {
+        ...state,
+        currentUser: action.currentUser,
+      };
+    }
     case actions.ADD_TRANSACTION: {
       const newTrxState = addTransactionToState(state.transactions, action.transaction);
       return {
@@ -26,6 +32,7 @@ const appStateReducer = (state, action) => {
 
 const initialState = {
   transactions: [],
+  currentUser: null,
 };
 
 export function useAppState() {

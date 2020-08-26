@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import firebase from '../../lib/firebase';
@@ -6,9 +7,9 @@ import { useAppState } from '../../appContext';
 import TransactionList from '../TransactionsList';
 import TransactionHero from '../TransactionHero';
 
-const TransactionsHome = ({ className }) => {
-  const [, dispatch] = useAppState();
+const TransactionsHome = ({ className, currentUser }) => {
   const [transactions, setTransactions] = useState([]);
+
   const query = firebase.firestore().collection('transactions').orderBy('date', 'desc');
   const [value, loading, error] = useCollection(query);
 
@@ -16,7 +17,7 @@ const TransactionsHome = ({ className }) => {
     if (value) {
       setTransactions(value.docs);
     }
-  }, [value, dispatch]);
+  }, [value]);
 
   if (error) {
     console.log('there was an error');
@@ -31,8 +32,15 @@ const TransactionsHome = ({ className }) => {
     );
   }
 
+  if (!currentUser) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <div className={className}>
+      <button type="button" onClick={() => firebase.auth().signOut()}>
+        signout
+      </button>
       <TransactionHero transactions={transactions} />
       <TransactionList transactions={transactions} />
     </div>

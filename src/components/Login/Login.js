@@ -1,11 +1,17 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { GoZap } from 'react-icons/go';
 import SignInWithGoogleButton from '../SignInWithGoogleButton';
 import { signInWithGoogle } from '../../lib/google';
 
-function Login({ className }) {
+function Login({ className, currentUser }) {
   const handleGoogleLogin = () => signInWithGoogle();
+
+
+  if (currentUser) {
+    return <Redirect to="/transactions" />;
+  }
 
   return (
     <div className={className}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
+import { Redirect, withRouter, Link } from 'react-router-dom';
+
 import DatePicker from 'react-datepicker';
 import { useAppState } from '../../appContext';
 import firebase from '../../lib/firebase';
@@ -12,7 +13,7 @@ import InputField from '../InputField';
 import NumberImputButton from '../NumberInputButton';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Home = ({ className, history }) => {
+const Home = ({ className, history, currentUser }) => {
   const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
   const [trxAmount, setTrxAmount] = useState(0);
@@ -20,6 +21,10 @@ const Home = ({ className, history }) => {
   const [trxDate, setTrxDate] = useState(new Date());
 
   const amounts = [10, 5, 1];
+
+  if (!currentUser) {
+    return <Redirect to="/login" />;
+  }
 
   const saveTransaction = async (trx) => {
     try {
