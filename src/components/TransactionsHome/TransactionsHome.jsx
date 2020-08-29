@@ -49,6 +49,10 @@ const TransactionsHome = ({ className, currentUser }) => {
 
 const StyledTransactionHome = styled(TransactionsHome)`
   background-color: #F3F4F6;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 600px;
 `;
 
 export default StyledTransactionHome;

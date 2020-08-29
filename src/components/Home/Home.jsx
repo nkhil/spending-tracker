@@ -128,37 +128,44 @@ const Home = ({ className, history, currentUser }) => {
 };
 
 const StyledHome = styled(Home)`
+
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 600px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-options-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .increment-decriment-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .submit-button {
+    background-color: black;
+    color: white;
+    font-size: 1.5rem;
+    margin: 30px 0;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px 5px;
+  }
   
   @media screen and (max-width: 599px) {
     margin: 0 10px;
 
-    .form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .category-options-row {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .increment-decriment-buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-
-    .submit-button {
-      background-color: black;
-      color: white;
-      font-size: 1.5rem;
-      margin: 30px 0;
-      padding: 5px;
-      border-radius: 5px;
-      border: 0;
-      padding: 10px 5px;
-    }
+    
   }
 `;
 
