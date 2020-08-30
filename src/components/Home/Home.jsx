@@ -11,9 +11,12 @@ import commonMerchants from '../../constants/commonMerchants';
 import CategoryButton from '../MerchantNameButton';
 import InputField from '../InputField';
 import NumberImputButton from '../NumberInputButton';
+import Navbar from '../Navbar';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const Home = ({ className, history, currentUser }) => {
+const Home = ({
+  className, history, currentUser, navbarIsVisible, setNavbarIsVisible,
+}) => {
   const [, dispatch] = useAppState();
   const [merchantName, setMerchantName] = useState('');
   const [trxAmount, setTrxAmount] = useState(0);
@@ -75,7 +78,7 @@ const Home = ({ className, history, currentUser }) => {
 
   return (
     <div className={className}>
-      <Link to="/transactions">Transactions</Link>
+      <Navbar isVisible={navbarIsVisible} setIsVisible={setNavbarIsVisible} />
       <form onSubmit={addTransactionToState} className="form">
         <InputField
           name="merchant-name"

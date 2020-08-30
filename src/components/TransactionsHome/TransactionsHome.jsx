@@ -3,11 +3,13 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import firebase from '../../lib/firebase';
-import { useAppState } from '../../appContext';
 import TransactionList from '../TransactionsList';
 import TransactionHero from '../TransactionHero';
+import Navbar from '../Navbar';
 
-const TransactionsHome = ({ className, currentUser }) => {
+const TransactionsHome = ({
+  className, currentUser, navbarIsVisible, setNavbarIsVisible,
+}) => {
   const [transactions, setTransactions] = useState([]);
 
   const query = firebase.firestore().collection('transactions').orderBy('date', 'desc');
@@ -27,6 +29,7 @@ const TransactionsHome = ({ className, currentUser }) => {
   if (loading) {
     return (
       <>
+        <Navbar isVisible={navbarIsVisible} setIsVisible={setNavbarIsVisible} />
         <h1>Loading...</h1>
       </>
     );
@@ -37,13 +40,13 @@ const TransactionsHome = ({ className, currentUser }) => {
   }
 
   return (
-    <div className={className}>
-      <button type="button" onClick={() => firebase.auth().signOut()}>
-        signout
-      </button>
-      <TransactionHero transactions={transactions} />
-      <TransactionList transactions={transactions} />
-    </div>
+    <>
+      <div className={className}>
+        <Navbar isVisible={navbarIsVisible} setIsVisible={setNavbarIsVisible} />
+        <TransactionHero transactions={transactions} />
+        <TransactionList transactions={transactions} />
+      </div>
+    </>
   );
 };
 
