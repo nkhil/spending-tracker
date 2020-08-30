@@ -92,6 +92,7 @@ const StyledNavbar = styled(Navbar)`
       li {
         padding: 10px 5px;
         font-size: 1.2rem;
+        cursor: pointer;
 
         a {
           text-decoration: none;
