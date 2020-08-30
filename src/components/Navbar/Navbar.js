@@ -68,6 +68,7 @@ const StyledNavbar = styled(Navbar)`
   }
 
   .spending-tracker-cross-icon {
+    margin-right: 10px;
     display: ${(props) => {
     if (props.isVisible) {
       return 'block';
