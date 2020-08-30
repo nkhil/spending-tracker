@@ -50,7 +50,7 @@ function Navbar({ className, setIsVisible }) {
 const StyledNavbar = styled(Navbar)`
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
+  margin-top: 10px;
 
   .navbar-icon {
     display: flex;

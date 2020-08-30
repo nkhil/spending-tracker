@@ -29,8 +29,10 @@ const TransactionsHome = ({
   if (loading) {
     return (
       <>
-        <Navbar isVisible={navbarIsVisible} setIsVisible={setNavbarIsVisible} />
-        <h1>Loading...</h1>
+        <div className={className}>
+          <Navbar isVisible={navbarIsVisible} setIsVisible={setNavbarIsVisible} />
+          <h1>Loading...</h1>
+        </div>
       </>
     );
   }
@@ -55,7 +57,7 @@ const StyledTransactionHome = styled(TransactionsHome)`
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 600px;
+  max-width: 450px;
 `;
 
 export default StyledTransactionHome;

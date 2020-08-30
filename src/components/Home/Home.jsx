@@ -139,11 +139,15 @@ const StyledHome = styled(Home)`
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 600px;
+  max-width: 450px;
 
   .form {
     display: flex;
     flex-direction: column;
+  }
+
+  button {
+    cursor: pointer;
   }
 
   .category-options-row {
@@ -171,8 +175,6 @@ const StyledHome = styled(Home)`
   
   @media screen and (max-width: 599px) {
     margin: 0 10px;
-
-    
   }
 `;
 

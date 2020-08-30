@@ -39,6 +39,11 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  buttion {
+    cursor: pointer;
+  }
+  button:focus {outline:0;}
+
 `;
 
 export default GlobalStyle;

@@ -6,6 +6,13 @@ import TransactionItem from './TransactionItem';
 function TransactionList({ className, transactions }) {
   const formatDate = (date) => moment(date.toDate()).format('MMM D');
   let trxColour = true;
+  if (transactions.length === 0) {
+    return (
+      <div className={className}>
+        <h2>No transactions found.</h2>
+      </div>
+    );
+  }
   return (
     <div className={className}>
       <h2>Transactions</h2>
