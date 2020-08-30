@@ -4,9 +4,9 @@ import { HiMenu, HiX } from 'react-icons/hi';
 import navbarItems from '../../constants/navbar-items';
 import firebase from '../../lib/firebase';
 
-function Navbar({ className, isVisible, setIsVisible }) {
+function Navbar({ className, setIsVisible }) {
   const handleKeyPress = (e) => {
-    if (e.keyCode === 83) {
+    if (e.ctrlKey && e.keyCode === 83) {
       firebase.auth().signOut();
     }
   };
