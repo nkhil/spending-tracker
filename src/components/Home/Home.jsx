@@ -45,7 +45,11 @@ const Home = ({
     e.preventDefault();
     const name = merchantName || 'Default';
     const transaction = {
-      merchantName: name, trxAmount, category: trxCategory, date: trxDate,
+      merchantName: name,
+      trxAmount,
+      category: trxCategory,
+      date: trxDate,
+      userId: currentUser.uid,
     };
     dispatch({ type: actions.ADD_TRANSACTION, transaction });
     setMerchantName('');
