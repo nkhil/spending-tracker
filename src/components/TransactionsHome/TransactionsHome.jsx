@@ -12,7 +12,7 @@ const TransactionsHome = ({
 }) => {
   const [transactions, setTransactions] = useState([]);
 
-  const query = firebase.firestore().collection('transactions').orderBy('date', 'desc');
+  const query = firebase.firestore().collection('transactions').where('userId', '==', (currentUser ? currentUser.uid : '1')).orderBy('date', 'desc');
   const [value, loading, error] = useCollection(query);
 
   useEffect(() => {
