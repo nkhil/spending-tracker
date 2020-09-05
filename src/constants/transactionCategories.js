@@ -5,4 +5,6 @@ export default [
   'Eating Out',
   'Utilities',
   'Cash',
+  'Entertainment',
+  'Bills',
 ];
