@@ -15,4 +15,8 @@ export default [
     merchantName: 'Restaurant',
     trxCategory: 'Eating Out',
   },
+  {
+    merchantName: 'Cash',
+    trxCategory: 'Cash',
+  },
 ];

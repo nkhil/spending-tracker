@@ -3,4 +3,6 @@ export default [
   'Groceries',
   'Travel',
   'Eating Out',
+  'Utilities',
+  'Cash',
 ];
